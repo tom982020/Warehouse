@@ -289,9 +289,26 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h4 class="card-title">Basic Table</h4>
-                                            <p class="card-description"><a href="/users/add" class="btn btn-success">
-                                                 Thêm User</a>
-                                            </p>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p class="card-description"><a href="/users/add" class="btn btn-info">
+                                                        Thêm User</a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <form action="/users" method="get">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <input type="text" name="search" id="search" class="form-control" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="submit" value="search" class="btn btn-success" />
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
                                             <table class="table">
                                                 <thead>
                                                     <tr>
@@ -303,7 +320,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <% data.forEach(function (user) { %>
-                                                        <tr>
+                                                        <tr id="<%=user._id%>">
                                                             <td>
                                                                 <%=user.First_name %>
                                                             </td>
@@ -317,23 +334,24 @@
                                                                 <a type="button" data-toggle="modal" style="font-size:20px;" class="btn-danger" data-target="#exampleModal<%=user._id%>">
                                                                     <label class="badge badge-danger" style="font-size:20px"><i class="mdi mdi-trash-can"></i></label>
                                                                 </a> &nbsp;
-                                                                <a href="users/edit/<%=user._id%>"><label class="badge badge-info" style="font-size:20px"><i class="mdi mdi-account-edit"></i></label></a></td>
+                                                                <a href="users/edit/<%=user._id%>"><label class="badge badge-warning" style="font-size:20px"><i class="mdi mdi-account-edit"></i></label></a></td>
                                                         </tr>
                                                         <div class="modal fade" id="exampleModal<%=user._id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                   </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        ...
+                                                                        Bạn Có muốn xóa
+                                                                        <%=user.username %> này không?
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="_delete('<%=user._id%>')">Xóa</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -384,6 +402,40 @@
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <!-- End custom js for this page -->
+    <script>
+        function _delete(id) {
+            $.ajax({
+                url: 'users/delete',
+                type: 'POST',
+                data: {
+                    'id': id
+                },
+                success: function(result) {
+                    // xóa ở giao diện
+                    $('#' + id).remove();
+                    console.log(result);
+                }
+            });
+            return false;
+
+            //alert(id);
+        }
+
+        function search() {
+            var search = $('#search').val();
+            $.ajax({
+                url: '/users/search',
+                type: 'post',
+                data: {
+                    'search': search
+                },
+                success: function(data) {
+                    return data
+                }
+            });
+            return false;
+        }
+    </script>
 </body>
 
 </html>

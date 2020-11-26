@@ -8,7 +8,7 @@
     <title>WareHouse Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../css/vendor.bundle.base.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -16,7 +16,7 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../css/style.css" type="text/css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="images/favicon.ico" />
     <base href="http://localhost:3000/">
@@ -287,14 +287,15 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h4 class="card-title">Thêm Tài Khoản</h4>
-                                            <form class="form-sample" action="users/add" method="post">
+                                            <form class="form-sample" action="users/edit" method="post">
                                                 <p class="card-description"> Thông Tin Nhân Viên </p>
                                                 <div class="row">
+                                                    <input type="hidden" value="<%= user._id %>" name="id">
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Tên</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="Firstname" id="Firstname" class="form-control" />
+                                                                <input type="text" name="Firstname" id="Firstname" value="<%= user.First_name%>" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -302,7 +303,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Họ và Tên Lót</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="Lastname" id="Lastname" class="form-control" />
+                                                                <input type="text" name="Lastname" id="Lastname" value="<%= user.Last_Name%>" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -312,7 +313,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Username</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="username" id="username" class="form-control" />
+                                                                <input type="text" name="username" id="username" value="<%= user.username%>" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -320,7 +321,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Password</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="Password" id="Password" class="form-control" />
+                                                                <input type="text" name="Password" id="Password" value="<%= user.password%>" readOnly class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -328,7 +329,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Email</label>
                                                             <div class="col-sm-9">
-                                                                <input type="email" name="email" id="email" class="form-control" />
+                                                                <input type="email" name="email" id="email" value="<%= user.email%>" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -382,7 +383,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Số Điện Thoại</label>
                                                             <div class="col-sm-9">
-                                                                <input type="number" name="phone" id="phone" class="form-control" />
+                                                                <input type="number" name="phone" value="<%= user.phone%>" id="phone" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -392,7 +393,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Địa Chỉ</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="address" id="address" class="form-control" />
+                                                                <input type="text" name="address" value="<%= user.address%>" id="address" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -400,7 +401,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Số Chứng Minh Thư</label>
                                                             <div class="col-sm-9">
-                                                                <input type="number" name="cmnd" id="cmnd" class="form-control" />
+                                                                <input type="number" name="cmnd" value="<%= user.CMND%>" id="cmnd" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -411,7 +412,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Quận.Huyện</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="District" id="District" class="form-control" />
+                                                                <input type="text" name="District" value="<%= user.District%>" id="District" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -419,7 +420,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Thành Phố/Tỉnh</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" name="City" id="City" class="form-control" />
+                                                                <input type="text" name="City" id="City" value="<%= user.City%>" class="form-control" />
                                                             </div>
                                                         </div>
                                                     </div>
